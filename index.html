@@ -113,7 +113,7 @@
         @media (pointer: fine) {
             body { cursor: none; }
             
-            input, textarea, button { cursor: auto !important; }
+            input, textarea, button, a { cursor: none !important; } /* Ensure custom cursor works on interactive elements */
 
             .cursor-dot, .cursor-ring {
                 position: fixed;
@@ -236,7 +236,7 @@
             display: flex; 
             align-items: center; 
             gap: 1rem; 
-            margin-left: 2rem; /* Memberi jarak antara link dan tombol control */
+            margin-left: 2rem; 
         }
 
         /* PERBAIKAN LOGO BULAN (THEME TOGGLE) */
@@ -252,7 +252,7 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            flex-shrink: 0; /* Mencegah tombol mengecil */
+            flex-shrink: 0;
         }
         .theme-toggle:hover { 
             transform: rotate(180deg); 
@@ -711,12 +711,12 @@
         /* PERBAIKAN LOGO CONTACT (CONTACT ITEM) */
         .contact-item { 
             display: flex; 
-            align-items: center; /* Center vertical */
-            gap: 1.2rem; /* Jarak antar ikon dan teks */
+            align-items: center; 
+            gap: 1.2rem; 
             margin-bottom: 1.5rem; 
             color: var(--text-muted);
-            padding: 1.2rem; /* Padding internal agar rapi */
-            background: rgba(255,255,255,0.02); /* Latar belakang halus */
+            padding: 1.2rem; 
+            background: rgba(255,255,255,0.02); 
             border-radius: 16px;
             border: 1px solid transparent;
             transition: 0.3s;
@@ -743,7 +743,7 @@
         }
         
         .contact-icon {
-            width: 48px; height: 48px; /* Ukuran pas */
+            width: 48px; height: 48px; 
             background: var(--input-bg);
             border: 1px solid var(--input-border);
             border-radius: 14px;
@@ -753,7 +753,7 @@
             color: var(--primary-red);
             font-size: 1.2rem;
             transition: 0.3s;
-            flex-shrink: 0; /* Mencegah ikon mengecil */
+            flex-shrink: 0; 
         }
         
         .contact-item:hover .contact-icon { 
@@ -994,9 +994,11 @@
 
     <canvas id="bgCanvas"></canvas>
 
-    <!-- Audio Background -->
+    <!-- Audio Background (UPDATED) -->
+    <!-- Pastikan file 'About You - The 1975 (Instrumental) - Hans Zanger.mp3' ada di folder yang sama -->
     <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+        <source src="About You - The 1975 (Instrumental) - Hans Zanger.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
     </audio>
 
     <div class="cursor-dot"></div>
@@ -1207,217 +1209,143 @@
                 </div>
                 <div class="about-card hover-trigger">
                     <h3>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        <!-- SVG Monitor/Code Icon (Reconstructed) -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                         Experience
                     </h3>
                     <ul class="about-list">
-                        <li>Freelance Web Dev</li>
-                        <li>3+ Years Coding</li>
-                        <li>Small Project Owner</li>
-                    </ul>
-                </div>
-                <div class="about-card hover-trigger">
-                    <h3>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                        Hobbies
-                    </h3>
-                    <ul class="about-list">
-                        <li>Sports</li>
-                        <li>Learning Programming</li>
-                        <li>Exploring New Tech</li>
+                        <li>Freelance Web Developer</li>
+                        <li>UI/UX Design Projects</li>
+                        <li>Open Source Contributor</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section class="contact-section reveal" id="contact">
-            <h2 class="section-title">Let's Connect</h2>
+            <h2 class="section-title">Get In Touch</h2>
             <div class="contact-grid">
                 <div class="contact-info">
                     <h3>Contact Information</h3>
                     
-                    <!-- PERBAIKAN POSISI LOGO CONTACT -->
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+                    <div class="contact-item hover-trigger">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
                         <div class="contact-text-group">
                             <span class="contact-label">Email</span>
-                            <span>rafakhoironaalif@gmail.com</span>
+                            <span>rafa.khoiron@example.com</span>
                         </div>
                     </div>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
+                    <div class="contact-item hover-trigger">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
                         <div class="contact-text-group">
                             <span class="contact-label">Location</span>
                             <span>Jambi, Indonesia</span>
                         </div>
                     </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">🎓</div>
-                        <div class="contact-text-group">
-                            <span class="contact-label">Status</span>
-                            <span>Open for Work</span>
-                        </div>
+
+                </div>
+
+                <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="glass-input hover-trigger" placeholder="Your Name" required>
                     </div>
-
-                </div>
-
-                <div class="contact-form">
-                    <form onsubmit="handleForm(event)">
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="glass-input" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="glass-input" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Message</label>
-                            <textarea class="glass-textarea" placeholder="Write your message here..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-send">Send Message</button>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="glass-input hover-trigger" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="glass-textarea hover-trigger" placeholder="Your Message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send hover-trigger">Send Message</button>
+                </form>
             </div>
         </section>
-        
-        <footer>
-            <p>&copy; 2024 Rafa Khoiron Alif. All rights reserved.</p>
-        </footer>
 
     </div>
 
     <!-- Floating Controls -->
     <div class="floating-controls">
-        <div class="floating-clock" id="clock">
-            <span class="clock-text" id="time">00:00</span>
+        <!-- Sound Toggle -->
+        <button id="soundToggle" class="sound-toggle hover-trigger" aria-label="Toggle Music">
+            <svg class="sound-icon icon-sound-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <svg class="sound-icon icon-sound-off" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+
+        <!-- Clock -->
+        <div class="floating-clock">
+            <span class="clock-text" id="clockText">00:00</span>
             <span class="wib-label-mini">WIB</span>
         </div>
-        
-        <button class="sound-toggle hover-trigger" id="soundToggle" aria-label="Toggle Music">
-            <svg class="sound-icon icon-sound-on" viewBox="0 0 24 24"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" /></svg>
-            <svg class="sound-icon icon-sound-off" viewBox="0 0 24 24"><path d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" /></svg>
-        </button>
     </div>
 
+    <footer>
+        <p>&copy; 2024 Rafa Khoiron Alif. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- THEME TOGGLE ---
+        // --- 1. THEME TOGGLE ---
         const themeToggle = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-        
+        const html = document.documentElement;
+
+        // Check local storage or preference
+        if(localStorage.getItem('theme') === 'light') {
+            html.setAttribute('data-theme', 'light');
+        }
+
         themeToggle.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            const currentTheme = html.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
         });
 
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            htmlElement.setAttribute('data-theme', savedTheme);
-        }
-
-        // --- MOBILE MENU ---
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-        }
-
-        // --- CURSOR EFFECT ---
+        // --- 2. CUSTOM CURSOR ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorRing = document.querySelector('.cursor-ring');
-        
-        window.addEventListener('mousemove', (e) => {
+        const hoverTriggers = document.querySelectorAll('.hover-trigger, a, button, input, textarea');
+
+        document.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
 
+            // Dot follows instantly
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
 
+            // Ring follows with slight delay (handled by CSS transition, just update pos)
+            // Using animation frame for smoother Ring movement
             cursorRing.animate({
                 left: `${posX}px`,
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
         });
 
-        document.querySelectorAll('.hover-trigger').forEach(el => {
+        // Add hover effects for interactive elements
+        const allInteractives = document.querySelectorAll('a, button, input, textarea, .hover-trigger');
+        allInteractives.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
 
-        // --- SCROLL REVEAL ---
-        const reveals = document.querySelectorAll('.reveal');
-        
-        function checkReveal() {
-            const triggerBottom = window.innerHeight * 0.8;
-            reveals.forEach(box => {
-                const boxTop = box.getBoundingClientRect().top;
-                if(boxTop < triggerBottom) {
-                    box.classList.add('active');
-                }
-            });
-        }
-        window.addEventListener('scroll', checkReveal);
-        checkReveal(); // Check on load
-
-        // --- SKILL BARS ANIMATION ---
-        const profFills = document.querySelectorAll('.prof-fill');
-        const skillsSection = document.querySelector('.proficiency-section');
-        
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    profFills.forEach(fill => {
-                        fill.style.width = fill.getAttribute('data-width');
-                    });
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        if(skillsSection) skillObserver.observe(skillsSection);
-
-        // --- 3D CARD EFFECT ---
-        const cardWrapper = document.getElementById('cardWrapper');
-        const card = document.getElementById('glassCard');
-        const cardGlare = document.getElementById('cardGlare');
-
-        if(cardWrapper && card) {
-            cardWrapper.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Set Glare Pos
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
-                const rotateY = ((x - centerX) / centerX) * 10;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            cardWrapper.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
-            });
+        // --- 3. MOBILE MENU ---
+        const mobileMenu = document.getElementById('mobileMenu');
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
         }
 
-        // --- CLOCK ---
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('time').innerText = `${hours}:${minutes}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // --- SOUND TOGGLE ---
+        // --- 4. AUDIO PLAYER ---
         const bgMusic = document.getElementById('bgMusic');
         const soundToggle = document.getElementById('soundToggle');
         let isPlaying = false;
@@ -1427,21 +1355,91 @@
                 bgMusic.pause();
                 soundToggle.classList.remove('playing');
             } else {
-                bgMusic.volume = 0.4; // Set volume lower
-                bgMusic.play().catch(e => console.log("Audio play blocked by browser until user interaction"));
-                soundToggle.classList.add('playing');
+                // User interaction allows play
+                bgMusic.play().then(() => {
+                    soundToggle.classList.add('playing');
+                }).catch(e => {
+                    console.log("Audio play failed (interaction needed):", e);
+                    showToast("Click anywhere to enable audio");
+                });
             }
             isPlaying = !isPlaying;
         });
 
-        // --- COPY DISCORD ---
-        function copyDiscord() {
-            navigator.clipboard.writeText("rafa#1234"); // Ganti dengan ID asli
-            showToast("Discord ID Copied!");
+        // --- 5. 3D CARD EFFECT ---
+        const card = document.getElementById('glassCard');
+        const cardWrapper = document.getElementById('cardWrapper');
+        const glare = document.getElementById('cardGlare');
+
+        if(window.matchMedia("(min-width: 951px)").matches) {
+            cardWrapper.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Calculate center
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // Rotation values (reduce intensity)
+                const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                // CSS Variables for glare
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+
+                // Apply transform
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            cardWrapper.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                glare.style.opacity = 0;
+            });
+            
+            cardWrapper.addEventListener('mouseenter', () => {
+                glare.style.opacity = 1;
+            });
         }
 
-        // --- FORM HANDLER ---
-        function handleForm(e) {
+        // --- 6. SCROLL REVEAL & SKILL BARS ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const skillBars = document.querySelectorAll('.prof-fill');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+
+            // Animate skill bars when visible
+            skillBars.forEach(bar => {
+                const barTop = bar.getBoundingClientRect().top;
+                if(barTop < windowHeight - 50) {
+                    bar.style.width = bar.getAttribute('data-width');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
+        // --- 7. DISCORD COPY ---
+        function copyDiscord() {
+            navigator.clipboard.writeText("rafa#1234").then(() => {
+                showToast("Discord ID copied to clipboard!");
+            });
+        }
+
+        // --- 8. FORM SUBMIT (SIMULATION) ---
+        function handleFormSubmit(e) {
             e.preventDefault();
             const btn = e.target.querySelector('.btn-send');
             const originalText = btn.innerText;
@@ -1451,7 +1449,7 @@
 
             setTimeout(() => {
                 btn.innerText = "Message Sent!";
-                showToast("Message sent successfully!");
+                showToast("Thank you! Your message has been sent.");
                 e.target.reset();
                 
                 setTimeout(() => {
@@ -1461,89 +1459,103 @@
             }, 1500);
         }
 
-        // --- TOAST ---
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+        // --- 9. TOAST NOTIFICATION ---
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        // --- PARTICLE BACKGROUND (CANVAS) ---
+        // --- 10. CLOCK ---
+        function updateClock() {
+            const now = new Date();
+            // UTC+7 for WIB
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const wibTime = new Date(utc + (3600000 * 7));
+            
+            const hours = String(wibTime.getHours()).padStart(2, '0');
+            const minutes = String(wibTime.getMinutes()).padStart(2, '0');
+            
+            document.getElementById('clockText').innerText = `${hours}:${minutes}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- 11. PARTICLE BACKGROUND (Simple Canvas) ---
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
-        
-        let width, height;
         let particles = [];
-        
-        // Colors from CSS variables roughly
-        const particleColor = 'rgba(255, 31, 75, 0.5)'; 
-        
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            initParticles();
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-        
-        function initParticles() {
-            particles = [];
-            const count = Math.min(width * 0.1, 100); // Responsive count
-            for(let i=0; i<count; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 2 + 1
-                });
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                const isDark = html.getAttribute('data-theme') === 'dark';
+                ctx.fillStyle = isDark ? 'rgba(255, 31, 75, 0.5)' : 'rgba(100, 10, 20, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
-        
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            ctx.fillStyle = particleColor;
-            ctx.strokeStyle = particleColor;
-            
-            particles.forEach((p, index) => {
-                p.x += p.vx;
-                p.y += p.vy;
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
                 
-                // Bounce
-                if(p.x < 0 || p.x > width) p.vx *= -1;
-                if(p.y < 0 || p.y > height) p.vy *= -1;
-                
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Connect
-                for(let j = index + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
+                // Draw lines between close particles
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if(dist < 150) {
-                        ctx.lineWidth = 1 - dist/150;
+                    if (distance < 100) {
+                        const isDark = html.getAttribute('data-theme') === 'dark';
+                        ctx.strokeStyle = isDark 
+                            ? `rgba(255, 31, 75, ${1 - distance/100})` 
+                            : `rgba(100, 10, 20, ${1 - distance/100})`;
+                        ctx.lineWidth = 0.5;
                         ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
                     }
                 }
-            });
-            
-            requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animateParticles);
         }
-        
-        window.addEventListener('resize', resize);
-        resize();
-        animate();
+
+        initParticles();
+        animateParticles();
 
     </script>
 </body>
