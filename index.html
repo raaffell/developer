@@ -6,7 +6,8 @@
     <meta name="description" content="Portofolio Rafa Khoiron Alif - Web Developer">
     <title>Rafa Khoiron Alif - Portofolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Mengambil Font Inter, Syne, dan JetBrains Mono (untuk Jam yang profesional) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -472,8 +473,6 @@
 
         .status-bar-container {
             text-align: left; margin-top: 1.5rem; transform: translateZ(25px);
-            border-top: 1px solid var(--glass-border);
-            padding-top: 1.5rem;
         }
 
         .status-label { font-size: 0.7rem; color:var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; }
@@ -487,43 +486,67 @@
             animation: fillBar 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.5s; 
         }
 
-        /* CLOCK IN CARD */
-        .floating-clock {
-            width: 90px; 
-            height: 38px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            display: inline-flex; /* Changed to inline-flex to sit centered in text flow */
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            cursor: default;
-            font-family: 'Courier New', monospace;
-            margin-top: 1.5rem; /* Space from status bar */
-            transform: translateZ(15px); /* Slight pop out effect */
-        }
-        
-        .floating-clock:hover {
-            border-color: var(--primary-red);
-            background: rgba(255, 31, 75, 0.1);
-            transform: translateZ(15px) scale(1.05) rotate(-2deg);
-            box-shadow: 0 0 15px var(--primary-glow);
+        /* PROFESSIONAL CARD HUD (Clock) */
+        .hud-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+            margin: 2rem 0;
+            width: 100%;
+            transform: translateZ(15px);
+            opacity: 0.6;
         }
 
-        .clock-text {
-            font-size: 0.9rem;
-            font-weight: 700;
+        .pro-clock-wrapper {
+            transform: translateZ(20px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pro-clock {
+            background: rgba(255, 31, 75, 0.03); /* Sangat tipis */
+            border: 1px solid rgba(255, 31, 75, 0.15);
             color: var(--text-main);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px; /* Sedikit rounded square modern */
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .wib-label-mini {
-            font-size: 0.65rem;
+        /* Hover effect untuk jam */
+        .pro-clock:hover {
+            border-color: var(--primary-red);
+            background: rgba(255, 31, 75, 0.08);
+            box-shadow: 0 0 15px rgba(255, 31, 75, 0.15);
+        }
+
+        .clock-icon-svg {
+            width: 14px;
+            height: 14px;
             color: var(--primary-red);
+            margin-right: 4px;
+        }
+
+        .time-digits {
+            font-size: 1.1rem;
             font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+        }
+
+        .time-zone {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
         }
         
         /* ANIMATIONS */
@@ -1048,7 +1071,7 @@
                         <span class="hero-role-text">Web Developer</span>
                     </h1>
                     <p class="hero-desc">
-                        Rafa Khoiron Alif, 18 years old, from Jambi, Indonesia. A passionate learner actively developing knowledge in technology by creating and experimenting with various projects, focusing on fullstack development and digital innovations.
+                        Rafa Khoiron Alif, 18 years old, from Jambi, Indonesia. A passionate learner actively developing knowledge in technology by creating and experimenting with various small projects, focusing on web-based development and digital innovations.
                     </p>
                 </div>
                 <div class="card-3d-wrapper" id="cardWrapper">
@@ -1059,15 +1082,20 @@
                         </div>
                         <h2 class="card-name">Rafa Khoiron Alif</h2>
                         <p class="card-role">Full Stack Developer</p>
+                        
                         <div class="status-bar-container">
                             <div class="status-label">Availability</div>
                             <div class="status-track"><div class="status-fill"></div></div>
                         </div>
 
-                        <!-- CLOCK IN CARD (MOVED HERE) -->
-                        <div class="floating-clock">
-                            <span class="clock-text" id="clockText">00:00</span>
-                            <span class="wib-label-mini">WIB</span>
+                        <!-- PROFESSIONAL CLOCK HUD -->
+                        <div class="hud-divider"></div>
+                        <div class="pro-clock-wrapper">
+                            <div class="pro-clock">
+                                <svg class="clock-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span class="time-digits" id="clockText">00:00</span>
+                                <span class="time-zone">WIB</span>
+                            </div>
                         </div>
 
                     </div>
@@ -1232,7 +1260,7 @@
                         </div>
                         <div class="contact-text-group">
                             <span class="contact-label">Email</span>
-                            <span>rafakhoironaalif@gmail.com</span>
+                            <span>rafa.khoiron@example.com</span>
                         </div>
                     </div>
                     <div class="contact-item hover-trigger">
@@ -1275,7 +1303,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Rafa Khoiron Alif. All Rights Reserved. </p>
+        <p>&copy; 2024 Rafa Khoiron Alif. All Rights Reserved.</p>
     </footer>
 
     <!-- JAVASCRIPT LOGIC -->
