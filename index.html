@@ -486,6 +486,45 @@
             box-shadow: 0 0 15px var(--primary-glow); 
             animation: fillBar 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.5s; 
         }
+
+        /* CLOCK IN CARD */
+        .floating-clock {
+            width: 90px; 
+            height: 38px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            display: inline-flex; /* Changed to inline-flex to sit centered in text flow */
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+            font-family: 'Courier New', monospace;
+            margin-top: 1.5rem; /* Space from status bar */
+            transform: translateZ(15px); /* Slight pop out effect */
+        }
+        
+        .floating-clock:hover {
+            border-color: var(--primary-red);
+            background: rgba(255, 31, 75, 0.1);
+            transform: translateZ(15px) scale(1.05) rotate(-2deg);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .clock-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        
+        .wib-label-mini {
+            font-size: 0.65rem;
+            color: var(--primary-red);
+            font-weight: 700;
+        }
         
         /* ANIMATIONS */
         @keyframes float {
@@ -567,7 +606,7 @@
         .social-link-item:hover .social-name { color: #fff; }
         .social-link-item:hover svg { transform: scale(1.2) rotate(5deg); fill: #fff; }
 
-        /* NEW SKILLS LAYOUT */
+        /* SKILLS LAYOUT */
         .combined-skills-wrapper {
             display: flex;
             flex-direction: column;
@@ -655,51 +694,6 @@
             width: 0;
             transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
             box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        /* REPOSITIONED CLOCK */
-        .center-clock-wrapper {
-            display: flex;
-            justify-content: center;
-            margin: 4rem 0 6rem 0; /* Spasi dari Ability dan ke About */
-        }
-
-        .floating-clock {
-            width: 100px; 
-            height: 40px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            cursor: default;
-            font-family: 'Courier New', monospace;
-            /* Position now relative, not fixed */
-            position: relative; 
-        }
-        
-        .floating-clock:hover {
-            border-color: var(--primary-red);
-            background: rgba(255, 31, 75, 0.1);
-            transform: scale(1.05) rotate(-2deg);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .clock-text {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        
-        .wib-label-mini {
-            font-size: 0.65rem;
-            color: var(--primary-red);
-            font-weight: 700;
         }
 
         /* ABOUT & CONTACT */
@@ -1069,6 +1063,13 @@
                             <div class="status-label">Availability</div>
                             <div class="status-track"><div class="status-fill"></div></div>
                         </div>
+
+                        <!-- CLOCK IN CARD (MOVED HERE) -->
+                        <div class="floating-clock">
+                            <span class="clock-text" id="clockText">00:00</span>
+                            <span class="wib-label-mini">WIB</span>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1102,6 +1103,7 @@
                         <span class="social-name">Discord</span>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -1191,14 +1193,6 @@
             </section>
         </div>
 
-        <!-- REPOSITIONED CLOCK AREA -->
-        <div class="center-clock-wrapper reveal">
-            <div class="floating-clock">
-                <span class="clock-text" id="clockText">00:00</span>
-                <span class="wib-label-mini">WIB</span>
-            </div>
-        </div>
-
         <section class="about-section reveal" id="about">
             <h2 class="section-title">Get to Know Me Better</h2>
             <div class="about-grid">
@@ -1272,7 +1266,7 @@
 
     </div>
 
-    <!-- Floating Controls (Only Sound Toggle remains here) -->
+    <!-- Floating Controls (Only Sound Toggle) -->
     <div class="floating-controls">
         <button id="soundToggle" class="sound-toggle hover-trigger" aria-label="Toggle Music">
             <svg class="sound-icon icon-sound-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -1338,9 +1332,8 @@
         const bgMusic = document.getElementById('bgMusic');
         const soundToggle = document.getElementById('soundToggle');
         let isPlaying = false;
-        let audioStarted = false; // Flag untuk tracking apakah interaksi pertama sudah terjadi
+        let audioStarted = false; 
 
-        // Fungsi untuk memulai audio
         function startAudio() {
             if (!audioStarted) {
                 bgMusic.play().then(() => {
@@ -1352,19 +1345,16 @@
                     console.log("Auto-play prevented:", err);
                 });
                 
-                // Hapus event listener setelah percobaan pertama agar tidak spam
                 document.removeEventListener('click', startAudio);
                 document.removeEventListener('scroll', startAudio);
             }
         }
 
-        // Tambahkan listener untuk interaksi pertama (Klik atau Scroll)
         document.addEventListener('click', startAudio);
         document.addEventListener('scroll', startAudio);
 
-        // Manual Toggle Button
         soundToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Mencegah trigger klik ganda dengan listener global
+            e.stopPropagation(); 
             if (isPlaying) {
                 bgMusic.pause();
                 soundToggle.classList.remove('playing');
