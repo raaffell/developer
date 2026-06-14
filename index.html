@@ -113,7 +113,7 @@
         @media (pointer: fine) {
             body { cursor: none; }
             
-            input, textarea, button, a { cursor: none !important; } /* Ensure custom cursor works on interactive elements */
+            input, textarea, button, a { cursor: none !important; } 
 
             .cursor-dot, .cursor-ring {
                 position: fixed;
@@ -239,7 +239,7 @@
             margin-left: 2rem; 
         }
 
-        /* PERBAIKAN LOGO BULAN (THEME TOGGLE) */
+        /* THEME TOGGLE */
         .theme-toggle {
             background: transparent;
             border: 1px solid var(--glass-border);
@@ -657,6 +657,51 @@
             box-shadow: 0 0 15px var(--primary-glow);
         }
 
+        /* REPOSITIONED CLOCK */
+        .center-clock-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 4rem 0 6rem 0; /* Spasi dari Ability dan ke About */
+        }
+
+        .floating-clock {
+            width: 100px; 
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+            font-family: 'Courier New', monospace;
+            /* Position now relative, not fixed */
+            position: relative; 
+        }
+        
+        .floating-clock:hover {
+            border-color: var(--primary-red);
+            background: rgba(255, 31, 75, 0.1);
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .clock-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        
+        .wib-label-mini {
+            font-size: 0.65rem;
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+
         /* ABOUT & CONTACT */
         .about-grid {
             display: grid;
@@ -708,7 +753,6 @@
         
         .contact-info h3 { font-family: 'Syne'; margin-bottom: 2rem; color: var(--text-main); }
         
-        /* PERBAIKAN LOGO CONTACT (CONTACT ITEM) */
         .contact-item { 
             display: flex; 
             align-items: center; 
@@ -837,42 +881,7 @@
             flex-direction: column;
             gap: 15px;
             z-index: 99;
-        }
-
-        /* NEW FLOATING CLOCK STYLE */
-        .floating-clock {
-            width: 85px; 
-            height: 35px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            cursor: default;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .floating-clock:hover {
-            border-color: var(--primary-red);
-            background: rgba(255, 31, 75, 0.1);
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        .clock-text {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        
-        .wib-label-mini {
-            font-size: 0.6rem;
-            color: var(--primary-red);
-            font-weight: 700;
+            align-items: flex-end;
         }
 
         .sound-toggle {
@@ -980,7 +989,7 @@
             .social-info { flex-direction: column; gap: 0.5rem; }
             html { scroll-padding-top: 80px; }
 
-            /* Perbaikan posisi Theme Toggle di Mobile */
+            /* Theme Toggle Mobile */
             .nav-controls { margin-left: auto; }
             .theme-toggle { width: 40px; height: 40px; }
         }
@@ -994,11 +1003,9 @@
 
     <canvas id="bgCanvas"></canvas>
 
-    <!-- Audio Background (UPDATED) -->
-    <!-- Pastikan file 'About You - The 1975 (Instrumental) - Hans Zanger.mp3' ada di folder yang sama -->
+    <!-- Audio Background -->
     <audio id="bgMusic" loop>
         <source src="About You - The 1975 (Instrumental) - Hans Zanger.mp3" type="audio/mpeg">
-        Browser Anda tidak mendukung elemen audio.
     </audio>
 
     <div class="cursor-dot"></div>
@@ -1027,7 +1034,6 @@
             </ul>
 
             <div class="nav-controls">
-                <!-- LOGO BULAN (THEME TOGGLE) -->
                 <button id="theme-toggle" class="theme-toggle hover-trigger" aria-label="Toggle Theme">
                     <svg class="theme-icon icon-moon" viewBox="0 0 24 24"><path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg>
                     <svg class="theme-icon icon-sun" viewBox="0 0 24 24"><path d="M6.76,4.84l-1.8-1.79l-1.41,1.41l1.79,1.79C4.46,7.06,4.24,7.89,4.24,8.76c0,1.38,1.12,2.5,2.5,2.5 c0.87,0,1.7-0.22,2.51-0.53l1.79,1.79l1.41-1.41L9.4,8.76c0.31-0.81,0.53-1.64,0.53-2.51c0-1.38-1.12-2.5-2.5-2.5 C7.56,3.75,7.24,4.13,6.76,4.84z M12,5v2c3.31,0,6,2.69,6,6s-2.69,6-6,6v2c4.42,0,8-3.58,8-8S16.42,5,12,5z M12,1c-0.55,0-1,0.45-1,1v2 c0,0.55,0.45,1,1,1s1-0.45,1-1-1V2C13,1.45,12.55,1,12,1z M12,19c-0.55,0-1,0.45-1,1v2c0,0.55,0.45,1,1,1s1-0.45,1-1-1v-2C13,19.45,12.55,19,12,19z M4.22,4.22c-0.39,0.39-0.39,1.02,0,1.41l1.41,1.41c0.39,0.39,1.02,0.39,1.41,0s0.39-1.02,0-1.41L5.64,4.22C5.25,3.83,4.61,3.83,4.22,4.22z M18.36,18.36c-0.39,0.39-0.39,1.02,0,1.41l1.41,1.41c0.39,0.39,1.02,0.39,1.41,0s0.39-1.02,0-1.41l-1.41-1.41 C19.39,17.97,18.76,17.97,18.36,18.36z M4.22,19.78c0.39,0.39,1.02,0.39,1.41,0l1.41-1.41c0.39-0.39,0.39-1.02,0-1.41s-1.02-0.39-1.41,0l-1.41,1.41 C3.83,18.76,3.83,19.39,4.22,19.78z M18.36,5.64c-0.39,0.39-0.39,1.02,0,1.41l1.41,1.41c0.39,0.39,1.02,0.39,1.41,0s0.39-1.02,0-1.41l-1.41-1.41 C19.39,5.25,18.76,5.25,18.36,5.64z"/></svg>
@@ -1055,7 +1061,6 @@
                     <div class="glass-card" id="glassCard">
                         <div class="card-glare" id="cardGlare"></div>
                         <div class="card-img-box">
-                            <!-- Gambar placeholder jika gambar lokal tidak ada -->
                             <img src="profil.jpg" onerror="this.src='https://picsum.photos/seed/rafa/200/200'" alt="Rafa Profile"> 
                         </div>
                         <h2 class="card-name">Rafa Khoiron Alif</h2>
@@ -1091,14 +1096,12 @@
                     </div>
                 </a>
 
-                <!-- DISCORD BUTTON -->
                 <div class="social-link-item hover-trigger" onclick="copyDiscord()" title="Click to copy Discord ID">
                     <div class="social-info">
                         <svg class="icon-discord" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419z"/></svg>
                         <span class="social-name">Discord</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -1106,9 +1109,7 @@
             <section style="padding: 0;">
                 <h2 class="section-title">Tech Stack</h2>
                 
-                <!-- NEW 4-COLUMN SKILLS LAYOUT -->
                 <div class="skills-categories-grid">
-                    <!-- Column 1: Frontend Development -->
                     <div class="skill-category-card">
                         <div class="skill-cat-title">Frontend Development</div>
                         <div class="skill-list">
@@ -1123,7 +1124,6 @@
                         </div>
                     </div>
 
-                    <!-- Column 2: Backend Core -->
                     <div class="skill-category-card">
                         <div class="skill-cat-title">Backend Core</div>
                         <div class="skill-list">
@@ -1138,7 +1138,6 @@
                         </div>
                     </div>
 
-                    <!-- Column 3: Coding Languages -->
                     <div class="skill-category-card">
                         <div class="skill-cat-title">Coding Languages</div>
                         <div class="skill-list">
@@ -1153,7 +1152,6 @@
                         </div>
                     </div>
 
-                    <!-- Column 4: Designers & Git -->
                     <div class="skill-category-card">
                         <div class="skill-cat-title">Designers & Git</div>
                         <div class="skill-list">
@@ -1193,6 +1191,14 @@
             </section>
         </div>
 
+        <!-- REPOSITIONED CLOCK AREA -->
+        <div class="center-clock-wrapper reveal">
+            <div class="floating-clock">
+                <span class="clock-text" id="clockText">00:00</span>
+                <span class="wib-label-mini">WIB</span>
+            </div>
+        </div>
+
         <section class="about-section reveal" id="about">
             <h2 class="section-title">Get to Know Me Better</h2>
             <div class="about-grid">
@@ -1209,7 +1215,6 @@
                 </div>
                 <div class="about-card hover-trigger">
                     <h3>
-                        <!-- SVG Monitor/Code Icon (Reconstructed) -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                         Experience
                     </h3>
@@ -1227,7 +1232,6 @@
             <div class="contact-grid">
                 <div class="contact-info">
                     <h3>Contact Information</h3>
-                    
                     <div class="contact-item hover-trigger">
                         <div class="contact-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -1237,7 +1241,6 @@
                             <span>rafa.khoiron@example.com</span>
                         </div>
                     </div>
-
                     <div class="contact-item hover-trigger">
                         <div class="contact-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -1247,7 +1250,6 @@
                             <span>Jambi, Indonesia</span>
                         </div>
                     </div>
-
                 </div>
 
                 <form id="contactForm" onsubmit="handleFormSubmit(event)">
@@ -1270,19 +1272,12 @@
 
     </div>
 
-    <!-- Floating Controls -->
+    <!-- Floating Controls (Only Sound Toggle remains here) -->
     <div class="floating-controls">
-        <!-- Sound Toggle -->
         <button id="soundToggle" class="sound-toggle hover-trigger" aria-label="Toggle Music">
-            <svg class="sound-icon icon-sound-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <svg class="sound-icon icon-sound-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
             <svg class="sound-icon icon-sound-off" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
         </button>
-
-        <!-- Clock -->
-        <div class="floating-clock">
-            <span class="clock-text" id="clockText">00:00</span>
-            <span class="wib-label-mini">WIB</span>
-        </div>
     </div>
 
     <footer>
@@ -1295,7 +1290,6 @@
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
-        // Check local storage or preference
         if(localStorage.getItem('theme') === 'light') {
             html.setAttribute('data-theme', 'light');
         }
@@ -1314,25 +1308,20 @@
         // --- 2. CUSTOM CURSOR ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorRing = document.querySelector('.cursor-ring');
-        const hoverTriggers = document.querySelectorAll('.hover-trigger, a, button, input, textarea');
 
         document.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
 
-            // Dot follows instantly
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
 
-            // Ring follows with slight delay (handled by CSS transition, just update pos)
-            // Using animation frame for smoother Ring movement
             cursorRing.animate({
                 left: `${posX}px`,
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
         });
 
-        // Add hover effects for interactive elements
         const allInteractives = document.querySelectorAll('a, button, input, textarea, .hover-trigger');
         allInteractives.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
@@ -1345,23 +1334,45 @@
             mobileMenu.classList.toggle('active');
         }
 
-        // --- 4. AUDIO PLAYER ---
+        // --- 4. AUDIO PLAYER & AUTO-PLAY ON INTERACTION ---
         const bgMusic = document.getElementById('bgMusic');
         const soundToggle = document.getElementById('soundToggle');
         let isPlaying = false;
+        let audioStarted = false; // Flag untuk tracking apakah interaksi pertama sudah terjadi
 
-        soundToggle.addEventListener('click', () => {
+        // Fungsi untuk memulai audio
+        function startAudio() {
+            if (!audioStarted) {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    soundToggle.classList.add('playing');
+                    audioStarted = true;
+                    console.log("Audio auto-started via user interaction");
+                }).catch(err => {
+                    console.log("Auto-play prevented:", err);
+                });
+                
+                // Hapus event listener setelah percobaan pertama agar tidak spam
+                document.removeEventListener('click', startAudio);
+                document.removeEventListener('scroll', startAudio);
+            }
+        }
+
+        // Tambahkan listener untuk interaksi pertama (Klik atau Scroll)
+        document.addEventListener('click', startAudio);
+        document.addEventListener('scroll', startAudio);
+
+        // Manual Toggle Button
+        soundToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Mencegah trigger klik ganda dengan listener global
             if (isPlaying) {
                 bgMusic.pause();
                 soundToggle.classList.remove('playing');
             } else {
-                // User interaction allows play
                 bgMusic.play().then(() => {
                     soundToggle.classList.add('playing');
-                }).catch(e => {
-                    console.log("Audio play failed (interaction needed):", e);
-                    showToast("Click anywhere to enable audio");
-                });
+                    audioStarted = true;
+                }).catch(e => console.log(e));
             }
             isPlaying = !isPlaying;
         });
@@ -1377,19 +1388,15 @@
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 
-                // Calculate center
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                // Rotation values (reduce intensity)
-                const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
+                const rotateX = ((y - centerY) / centerY) * -10; 
                 const rotateY = ((x - centerX) / centerX) * 10;
 
-                // CSS Variables for glare
                 card.style.setProperty('--mouse-x', `${x}px`);
                 card.style.setProperty('--mouse-y', `${y}px`);
 
-                // Apply transform
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
 
@@ -1418,7 +1425,6 @@
                 }
             });
 
-            // Animate skill bars when visible
             skillBars.forEach(bar => {
                 const barTop = bar.getBoundingClientRect().top;
                 if(barTop < windowHeight - 50) {
@@ -1428,7 +1434,6 @@
         };
 
         window.addEventListener('scroll', revealOnScroll);
-        // Trigger once on load
         revealOnScroll();
 
         // --- 7. DISCORD COPY ---
@@ -1438,7 +1443,7 @@
             });
         }
 
-        // --- 8. FORM SUBMIT (SIMULATION) ---
+        // --- 8. FORM SUBMIT ---
         function handleFormSubmit(e) {
             e.preventDefault();
             const btn = e.target.querySelector('.btn-send');
@@ -1470,7 +1475,6 @@
         // --- 10. CLOCK ---
         function updateClock() {
             const now = new Date();
-            // UTC+7 for WIB
             const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
             const wibTime = new Date(utc + (3600000 * 7));
             
@@ -1482,7 +1486,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // --- 11. PARTICLE BACKGROUND (Simple Canvas) ---
+        // --- 11. PARTICLE BACKGROUND ---
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -1532,7 +1536,6 @@
                 particles[i].update();
                 particles[i].draw();
                 
-                // Draw lines between close particles
                 for (let j = i; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
